@@ -12,6 +12,7 @@ exports.registerUser = async (req, res) => {
     console.log("HashedPassword!", hashedPassword);
     console.log("Email:", email);
     console.log("Name: ", name);
+    res.redirect("/");
   } catch (error) {
     res.render("error", { error: error, title: "Error Page" });
   }
