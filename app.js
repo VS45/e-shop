@@ -1,5 +1,4 @@
 const express = require("express");
-const bodyParser = require("body-parser");
 const appRouter = require("./routes/app.routes");
 const path = require("path");
 const app = express();
@@ -16,7 +15,7 @@ app.use(
 app.set("view engine", "ejs");
 app.set("views", "views");
 app.use(express.static(path.join(__dirname, "assets")));
-app.use(express.json())
+app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(appRouter);
 app.listen(PORT, () => {
