@@ -40,16 +40,6 @@ exports.postLogin = (req, res) => {
       res.render("error", { error: "Wrong Password", title: "Error Page" });
     }
   });
-  /*  db.query('SELECT * FROM users WHERE username = ?', [username], async (err, results) => {
-        if (err) throw err;
-        if (results.length == 0 || !(await bcrypt.compare(password, results[0].password))) {
-            res.send('Incorrect username or password');
-        } else {
-            req.session.loggedin = true;
-            req.session.username = username;
-            res.redirect('/dashboard');
-        }
-    }); */
 };
 
 /* app.get("/dashboard", (req, res) => {
