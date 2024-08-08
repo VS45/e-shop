@@ -6,6 +6,8 @@ const {
   registerUser,
   getLogin,
   postLogin,
+  getDashboard,
+  getLogout,
 } = require("../controller/authController");
 const router = express.Router();
 
@@ -15,4 +17,6 @@ router.get("/signup", getSignup);
 router.get("/login", getLogin);
 router.post("/login", postLogin);
 router.post("/register", registerUser);
+router.get("/dashboard", getDashboard);
+router.get("/logout", getLogout);
 module.exports = router;

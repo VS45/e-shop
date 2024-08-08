@@ -34,7 +34,7 @@ exports.postLogin = (req, res) => {
     const isValid = await bcrypt.compare(password, results[0].password);
     if (isValid) {
       req.session.loggedin = true;
-      req.session.username = username;
+      req.session.username = email;
       res.redirect("/dashboard");
     } else {
       res.render("error", { error: "Wrong Password", title: "Error Page" });
@@ -42,17 +42,20 @@ exports.postLogin = (req, res) => {
   });
 };
 
-/* app.get("/dashboard", (req, res) => {
+exports.getDashboard = (req, res) => {
   if (req.session.loggedin) {
-    res.render("dashboard", { username: req.session.username });
+    res.render("dashboard", {
+      username: req.session.username,
+      title: "Dashboard Page",
+    });
   } else {
     res.send("Please login to view this page!");
   }
-});
+};
 
-app.get("/logout", (req, res) => {
+exports.getLogout = (req, res) => {
   req.session.destroy((err) => {
     if (err) throw err;
     res.redirect("/");
   });
-}); */
+};
