@@ -49,7 +49,7 @@ exports.getDashboard = (req, res) => {
       title: "Dashboard Page",
     });
   } else {
-    res.send("Please login to view this page!");
+    res.redirect("/login");
   }
 };
 
