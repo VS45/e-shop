@@ -9,6 +9,7 @@ const {
   getDashboard,
   getLogout,
 } = require("../controller/authController");
+const { isAuth } = require("../middleware/auth");
 const router = express.Router();
 
 router.get("/", getHome);
@@ -17,6 +18,6 @@ router.get("/signup", getSignup);
 router.get("/login", getLogin);
 router.post("/login", postLogin);
 router.post("/register", registerUser);
-router.get("/dashboard", getDashboard);
+router.get("/dashboard", isAuth, getDashboard);
 router.get("/logout", getLogout);
 module.exports = router;

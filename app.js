@@ -11,7 +11,11 @@ app.use(
     saveUninitialized: true,
   })
 );
-
+app.use((req, res, next) => {
+  res.locals.isLoggedIn = req.session.isLoggedIn || false;
+  res.locals.Username= req.session.username||undefined
+  next();
+});
 app.set("view engine", "ejs");
 app.set("views", "views");
 app.use(express.static(path.join(__dirname, "assets")));

@@ -14,8 +14,9 @@ exports.registerUser = async (req, res) => {
       if (error) {
         return res.render("error", { error: error, title: "Error Page" });
       }
-      console.log(result);
-      return res.redirect("/login");
+      req.session.isLoggedIn = true;
+      req.session.username = email;
+      return res.redirect("/dashboard");
     });
   } catch (error) {
     return res.render("error", { error: error, title: "Error Page" });
@@ -33,7 +34,7 @@ exports.postLogin = (req, res) => {
     console.log(results);
     const isValid = await bcrypt.compare(password, results[0].password);
     if (isValid) {
-      req.session.loggedin = true;
+      req.session.isLoggedIn = true;
       req.session.username = email;
       res.redirect("/dashboard");
     } else {
@@ -43,14 +44,10 @@ exports.postLogin = (req, res) => {
 };
 
 exports.getDashboard = (req, res) => {
-  if (req.session.loggedin) {
-    res.render("dashboard", {
-      username: req.session.username,
-      title: "Dashboard Page",
-    });
-  } else {
-    res.redirect("/login");
-  }
+  res.render("dashboard", {
+    username: req.session.username,
+    title: "Dashboard Page",
+  });
 };
 
 exports.getLogout = (req, res) => {
